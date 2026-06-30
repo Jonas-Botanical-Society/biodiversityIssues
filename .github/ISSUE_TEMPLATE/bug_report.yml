@@ -26,10 +26,26 @@ body:
     id: modded
     attributes:
       label: Modded
-      description: Did you use mods?
+      description: Did you use mods outside of Biodiversity or test this issue without your other mods enabled? Select the most strict option you tested under.
       options:
-        - Modded
-        - Vanilla
+        - Only Biodiversity
+        - Biodiversity + Expanded Foods
+        - Other mods too
+    validations:
+      required: false
+  - type: dropdown
+    id: modded
+    attributes:
+      label: Suspected problem mod
+      description: Which of the submods installed is most likely causing the issue?
+      options:
+        - Unknown
+        - Trees
+        - Crops
+        - Shrubs
+        - Flowers
+        - Herbs
+        - Foodiversity (Expanded foods compatability)
     validations:
       required: false
   - type: dropdown
