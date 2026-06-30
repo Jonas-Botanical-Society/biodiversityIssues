@@ -1,0 +1,47 @@
+# .github/workflows/label-platform.yml
+name: Label platform from issue form
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+
+jobs:
+  label-platform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply platform label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body || "";
+
+            // Pull out the text under the "### Platform" heading
+            const match = body.match(/### Platform\s*\n+([^\n#]+)/i);
+            if (!match) {
+              console.log("No Platform section found, skipping.");
+              return;
+            }
+
+            const answer = match[1].trim();
+
+            const labelMap = {
+              "Windows": "platform: windows",
+              "Mac": "platform: macos",
+              "Linux": "platform: linux",
+            };
+
+            const label = labelMap[answer];
+            if (!label) {
+              console.log(`No mapping for "${answer}", skipping.`);
+              return;
+            }
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: [label],
+            });
