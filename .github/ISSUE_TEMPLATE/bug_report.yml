@@ -1,5 +1,5 @@
 name: Bugreport
-description: You can report a vanilla bug or issue here.  Before starting, it is worth searching to see if your issue has already been reported. Search both Open *and* Closed issues
+description: You can report a Biodiversity speicfic bug or issuse here. Search both Open *and* Closed issues for issues similar to yours before making a new one.
 labels: ["status: new"]
 
 body:
@@ -7,8 +7,8 @@ body:
     id: shortdescription
     attributes:
       label: Game Version
-      description: What Game Version were you using?
-      placeholder: v1.20.
+      description: What Vintage Story game version are you using?
+      placeholder: v1.22.
     validations:
       required: false
   - type: dropdown
